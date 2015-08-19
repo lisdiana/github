@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Belajar Handlebars.js </title>
+		
+	</head>
+	
+	<body>
+			<div id="output"> </div>
+			<script id="some-template" type="text/x-handlebars-template">
+				<table border=1>
+					Daftar Pegawai
+					<thead>
+						<th> Firstname </th>
+						<th> Lastname </th>
+						<th> Memberid </th>
+						<th> Outletid </th>
+						<th> edate </th>
+						<th> Guest count </th>
+						<th> Password </th>
+						<th> status </th>
+						<th> id </th>
+						<th> Created at </th>
+						<th> Updated at </th>
+					</thead>
+					<tbody>
+						{{#users}}
+						<tr> 
+							<td> {{FirstName}} </td>
+							<td> {{LastName}}</td>
+							<td> {{memberId}} </td>
+							<td> {{outletId}}</td>
+							<td> {{eDate}} </td>
+							<td> {{guests_count}}</td>
+							<td> {{password}} </td>
+							<td> {{status}}</td>
+							<td> {{id}}</td>
+							<td> {{createdAt}}</td>
+							<td> {{updatedAt}}</td>
+						</tr>
+						{{/users}}
+					</tbody>
+				</table>
+				
+			</script>
+			
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="https://cloud.github.com/downloads/wycats/handlebars.js/handlebars-1.0.rc.1.min.js"> </script>
+		<script>
+				$.getJSON('http://128.199.238.74:1337/guestlist',function(data){
+						var source =  $('#some-template').html();
+						var template = Handlebars.compile(source);
+						var data = { users: [
+						{
+								    "FirstName": "test",
+								    "LastName": "test",
+								    "memberId": null,
+								    "outletId": "BF",
+								    "eDate": "2015-02-02 14:00",
+								    "guests_count": "1",
+								    "password": "123",
+								    "status": null,
+								    "id": 1,
+								    "createdAt": "2015-02-02T06:38:34.000Z",
+								    "updatedAt": "2015-02-02T06:42:43.000Z"
+								  },
+								  {
+								    "FirstName": "anu",
+								    "LastName": "itu",
+								    "memberId": null,
+								    "outletId": "BF",
+								    "eDate": "2015-02-17 16:00",
+								    "guests_count": "10",
+								    "password": "123123",
+								    "status": null,
+								    "id": 2,
+								    "createdAt": "2015-02-17T07:30:52.000Z",
+								    "updatedAt": "2015-02-17T07:30:52.000Z"
+								  }
+						]};
+						$('#output').html(template(data));
+						
+					});
+						
+			
+		</script>
+	</body>
+</html>
